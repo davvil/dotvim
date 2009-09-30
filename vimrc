@@ -122,7 +122,7 @@ imap <M-l> <C-w>l
 map \\ :make 
 map \n :cn<CR>
 map \p :cp<CR>
-map \t :TlistToggle<CR>
+"map \t :TlistToggle<CR>
 imap <C-Space> <C-X><C-O>
 
 set hidden
