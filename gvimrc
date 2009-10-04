@@ -1,8 +1,17 @@
 set guicursor+=i-c-ci:block-lCursor,r:hor25-lCursor,a:blinkon0
 colorscheme greenOnBlack
+
+if $HOSTNAME == "drizzt"
+    highlight Normal guifg=White
+endif
+
 if !has("gui_gtk2")
     " set guifont=-misc-fixed-medium-r-normal-*-18-*-*-*-*-*-iso10646-*
     set guifont=-*-terminus-medium-r-normal-*-14-*-*-*-*-*-iso10646-*
+
+    if $HOSTNAME == "drizzt"
+        set guifont=fixed
+    endif
 else
    "set guifont="xft:Bitstream Vera Sans Mono:size=8"
    set guifont=Monospace\ 8
