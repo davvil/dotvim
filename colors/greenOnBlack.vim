@@ -14,8 +14,7 @@ endif
 let g:colors_name = "greenOnBlack"
 
 " GUI
-"highlight Normal       guifg=palegreen  guibg=Black
-highlight Normal       guifg=white  guibg=Black
+highlight Normal       guifg=palegreen  guibg=Black
 highlight Search       guifg=Black      guibg=lightseagreen  gui=bold
 highlight Visual       guibg=#0000CD
 highlight Cursor       guifg=Black      guibg=gray80	     gui=NONE
@@ -32,7 +31,7 @@ highlight PreProc      guifg=yellow
 highlight Pmenu        guifg=black      guibg=gray60
 highlight PmenuSel     guifg=white      guibg=gray30
 highlight Boolean      guifg=#7FFFD4
-highlight StatusLine   guifg=#505B67    guibg=black
+highlight StatusLine   guifg=gray75     guibg=black
 highlight StatusLineNC guifg=#505B67    guibg=black
 highlight Folded       guifg=gray70     guibg=black          gui=bold
 highlight helpNote     guifg=yellow
@@ -62,7 +61,7 @@ highlight PreProc      ctermfg=yellow
 highlight Pmenu        ctermfg=black    ctermbg=87
 highlight PmenuSel     ctermfg=white    ctermbg=83
 highlight Boolean      ctermfg=42
-highlight StatusLine   ctermfg=81       ctermbg=black
+highlight StatusLine   ctermfg=85       ctermbg=black
 highlight StatusLineNC ctermfg=81       ctermbg=85
 highlight Folded       ctermfg=79       ctermbg=black       cterm=bold
 highlight helpNote     ctermfg=yellow
