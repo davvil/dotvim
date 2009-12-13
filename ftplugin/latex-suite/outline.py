@@ -11,29 +11,38 @@ import os
 import sys
 import StringIO
 
-# getFileContents {{{
-def getFileContents(argin, ext=''):
-    if type(argin) is str:
-        fname = argin + ext
-    else:
-            fname = argin.group(3) + ext
+# getFileContents 
+def getFileContents(fname):
+    if type(fname) is not str:
+        fname = fname.group(3)
 
-    # This longish thing is to make sure that all files are converted into
-    # \n seperated lines.
-    contents = '\n'.join(open(fname).read().splitlines())
+    # If neither the file or file.tex exists, then we just give up.
+    if not os.path.isfile(fname):
+        if os.path.isfile(fname + '.tex'):
+            fname += '.tex'
+        else:
+            return ''
+
+    try:
+        # This longish thing is to make sure that all files are converted into
+        # \n seperated lines.
+        contents = '\n'.join(open(fname).read().splitlines())
+    except IOError:
+        return ''
 
     # ugly hack in order to support \subimports
+    # TODO take the subdirectory of the subimport into account for further inputs/subimports
     subimportPat = re.compile(r'^\\subimport{(.*?)}{(.*?)}', re.M)
     contents = re.sub(subimportPat, r'\input{\1\2}', contents)
 
     # TODO what are all the ways in which a tex file can include another?
     pat = re.compile(r'^\\(@?)(include|input){(.*?)}', re.M)
-    contents = re.sub(pat, lambda input: getFileContents(input, ext), contents)
+    contents = re.sub(pat, getFileContents, contents)
 
     return ('%%==== FILENAME: %s' % fname) + '\n' + contents
 
-# }}}
-# stripComments {{{
+# 
+# stripComments 
 def stripComments(contents):
     # remove all comments except those of the form
     # %%==== FILENAME: <filename.tex>
@@ -42,8 +51,8 @@ def stripComments(contents):
     nonempty = [line for line in uncomm if line.strip()]
 
     return nonempty
-# }}}
-# addFileNameAndNumber {{{
+# 
+# addFileNameAndNumber 
 def addFileNameAndNumber(lines):
     filename = ''
     retval = ''
@@ -54,8 +63,8 @@ def addFileNameAndNumber(lines):
             retval += '<%s>%s\n' % (filename, line)
 
     return retval
-# }}}
-# getSectionLabels_Root {{{
+# 
+# getSectionLabels_Root 
 def getSectionLabels_Root(lineinfo, section_prefix, label_prefix):
     prev_txt = ''
     inside_env = 0
@@ -127,8 +136,8 @@ def getSectionLabels_Root(lineinfo, section_prefix, label_prefix):
 
     return outstr.getvalue()
     
-# }}}
-# getSectionLabels {{{
+# 
+# getSectionLabels 
 def getSectionLabels(lineinfo, 
         sectypes=['chapter', 'section', 'subsection', 'subsubsection'], 
         section_prefix='', label_prefix=''):
@@ -167,21 +176,20 @@ def getSectionLabels(lineinfo,
 
     return rettext
     
-# }}}
+# 
 
-# main {{{
+# main 
 def main(fname, label_prefix):
     [head, tail] = os.path.split(fname)
     if head:
         os.chdir(head)
 
-    [root, ext] = os.path.splitext(tail)
-    contents = getFileContents(root, ext)
+    contents = getFileContents(fname)
     nonempty = stripComments(contents)
     lineinfo = addFileNameAndNumber(nonempty)
 
     return getSectionLabels(lineinfo, label_prefix=label_prefix)
-# }}}
+# 
 
 if __name__ == "__main__":
     if len(sys.argv) > 2:
