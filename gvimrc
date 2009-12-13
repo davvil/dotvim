@@ -8,13 +8,13 @@ endif
 if !has("gui_gtk2")
     " set guifont=-misc-fixed-medium-r-normal-*-18-*-*-*-*-*-iso10646-*
     set guifont=-*-terminus-medium-r-normal-*-14-*-*-*-*-*-iso10646-*
-
-    if $HOSTNAME == "drizzt"
-        set guifont=fixed
-    endif
 else
    "set guifont="xft:Bitstream Vera Sans Mono:size=8"
-   set guifont=Monospace\ 8
+    if $HOSTNAME == "drizzt"
+        set guifont=fixed
+    elseif $HOSTNAME == "windu"
+        set guifont=Monospace\ 9
+    endif
 endif
 
 " Remove toolbar 
