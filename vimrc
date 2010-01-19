@@ -83,7 +83,7 @@ map \b :b#<CR>
 imap <C-@> <C-o>@
 map \* :exe "Match ".expand("<cword>")<CR>
 map \S :match<CR>
-map <S-Tab> :call NextField(' \{2,}',2,' ',0)<CR>
+map <S-Tab> :call NextField(' \{1,}',2,' ',0)<CR>
 map! <S-Tab> <C-O>:call NextField(' \{2,}',2,' ',0)<CR>
 " Enter accepts always a completion from the completion menu
 " See also the help entry for ins-completion-menu
@@ -119,6 +119,7 @@ imap <M-j> <C-w>j
 imap <M-h> <C-w>h
 imap <M-l> <C-w>l
 
+map \i :call AddIfndefGuard()<CR>
 map \\ :make 
 map \n :cn<CR>
 map \p :cp<CR>
