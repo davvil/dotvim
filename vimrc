@@ -20,6 +20,8 @@ set virtualedit=block
 set laststatus=2 "Always a status line
 set statusline=%f(%n)\ %h%r%m\ --\ l:%l\ (%p%%)\ c:%c
 
+set spellsuggest=best,20
+
 if v:version >= 700
     set completeopt=menu,longest
 endif

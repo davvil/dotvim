@@ -51,6 +51,7 @@ function AddIfndefGuard()
 
 		call append(0, "#ifndef ".s:header_guard)
 		call append(1, "#define ".s:header_guard)
+                call append(2, "")
 
 		let s:last_line = line('$')
 
