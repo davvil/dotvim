@@ -14,7 +14,11 @@ endif
 let g:colors_name = "greenOnBlack"
 
 " GUI
-highlight Normal       guifg=palegreen  guibg=Black
+if $HOSTNAME == "drizzt" || $HOSTNAME == "windu"
+    highlight Normal       guifg=white  guibg=Black
+else
+    highlight Normal       guifg=palegreen  guibg=Black
+endif
 highlight Search       guifg=Black      guibg=lightseagreen  gui=bold
 highlight Visual       guibg=#0000CD
 highlight Cursor       guifg=Black      guibg=gray80	     gui=NONE
