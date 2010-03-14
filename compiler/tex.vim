@@ -202,6 +202,7 @@ function! <SID>SetLatexEfm()
 
 	setlocal efm+=%E!\ LaTeX\ %trror:\ %m
 	setlocal efm+=%E!\ %m
+        setlocal efm+=%E%f:%l:\ %m
 
 	setlocal efm+=%+WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#
 	setlocal efm+=%+W%.%#\ at\ lines\ %l--%*\\d
