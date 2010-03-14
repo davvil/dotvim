@@ -28,7 +28,7 @@
 "=============================================================================
 
 " ==============================================================================
-" SafeLet: checks for value before giving default value {{{
+" SafeLet: checks for value before giving default value 
 " Description: The function takes in a single argument and splits it into 2
 "              parts, the first being the first <CWORD> found. this is taken
 "              as a variable name and the next part is assigned to it
@@ -53,11 +53,11 @@ function! <SID>SafeLet(arg)
 	endif
 endfunction 
 com! -nargs=+ TexLet :call <SID>SafeLet(<q-args>)
-" }}}
+
 " ============================================================================== 
 
 " ==============================================================================
-" General settings {{{
+" General settings 
 
 TexLet g:Tex_UsePython = 1
 
@@ -76,9 +76,9 @@ TexLet g:Tex_Debug = 0
 " this name.
 TexLet g:Tex_DebugLog = ''
 
-" }}}
+
 " ==============================================================================
-" Rules: specifications of programs for compiling and viewing {{{
+" Rules: specifications of programs for compiling and viewing 
 "
 
 " By default, when you compile a tex file using \ll, then you will be
@@ -99,7 +99,7 @@ TexLet g:Tex_MultipleCompileFormats = 'dvi'
 " TexLet g:Tex_FormatDependency_ps = 'dvi,ps'
 
 " ------------------------------------------------------------------------------
-" Compiler rules {{{
+" Compiler rules 
 " This is the first thing you should customize. It is set up for most common
 " values, but if use some other compiler, then you will want to change this.
 " As CompileFlags value you'd perhaps like to use, e.g., '-src-specials',
@@ -128,9 +128,9 @@ TexLet g:Tex_CompileRule_bib = g:Tex_BibtexFlavor . ' $*'
 " when deciding how to compile
 TexLet g:Tex_UseMakefile = 1
 
-" }}}
+
 " ------------------------------------------------------------------------------ 
-" Viewer rules {{{
+" Viewer rules 
 " these programs are for viewing other formats. 
 " NOTE: latex-suite will automatically append file.<format> to these functions
 "       when calling them. The viewer therefore cannot accept arguments after
@@ -187,11 +187,11 @@ endif
 " Doing something like this would not be possible using Tex_ViewRule_html
 TexLet g:Tex_ViewRuleComplete_dvi = ''
 
-" }}}
+
 " ------------------------------------------------------------------------------ 
-" }}}
+
 " ==============================================================================
-" Compiler: latex-suite comes with a customizable compiler plugin. {{{
+" Compiler: latex-suite comes with a customizable compiler plugin. 
 "           :help latex-compiling for a detailed description of these options.
 "
 " this is the list of patterns which will be ignored from the compiler output.
@@ -224,9 +224,8 @@ TexLet g:Tex_Flavor = 'latex'
 " the main file is "thesis.tex", $* will be "thesis".
 TexLet g:Tex_BibtexFlavor = 'bibtex'
 
-" specifies the MakeIndedx flavor and if necessary options. $* will be
-" replaced by the *root* of the main file name. See above.
-TexLet g:Tex_MakeIndexFlavor = 'makeindex $*.idx'
+" specifies the MakeIndedx flavor and if necessary options. 
+TexLet g:Tex_MakeIndexFlavor = 'makeindex'
 
 " By default the program described by g:Tex_Flavor above is called with the
 " flags '--src-specials --interaction=nonstopmode'. If your particular version
@@ -248,20 +247,20 @@ TexLet g:Tex_ShowErrorContext = 1
 " Remove temp files created during part compilations when vim exits.
 TexLet g:Tex_RemoveTempFiles = 1
 
-" }}}
+
 " ============================================================================== 
-" Project: how to deal with multi file projects via latex-suite {{{
+" Project: how to deal with multi file projects via latex-suite 
 
 " Use a valid vim expression here if you want to customize the way latex-suite
 " searches for a master file from within another file.
 TexLet g:Tex_MainFileExpression = ''
 
-" }}}
+
 " ============================================================================== 
-" Macros: latex-suite comes with a large number of macros to speed up typing {{{
+" Macros: latex-suite comes with a large number of macros to speed up typing 
 "         latex. 
 "
-" Place Holder Options: {{{
+" Place Holder Options: 
 " (See |placeholders| for a description of what place-holders are).
 "
 " these options are actually used by imaps.vim, therefore the prefix is Imap_
@@ -286,8 +285,8 @@ TexLet g:Imap_DeleteEmptyPlaceHolders = 0
 TexLet g:Imap_StickyPlaceHolders = 1
 
 
-" }}}
-" Menu Wizard Option: {{{
+
+" Menu Wizard Option: 
 " If the following variable is set to 1, then when an enviroment is chosen
 " from the menu then for selected environments, latex-suite asks a series of
 " questions on the command line and inserts a template with the corresponding
@@ -296,8 +295,8 @@ TexLet g:Imap_StickyPlaceHolders = 1
 " the places where fields need to be filled.
 TexLet g:Tex_UseMenuWizard = 0
 
-" }}}
-" Visual Mode Mapping Correction:  {{{
+
+" Visual Mode Mapping Correction:  
 " With so many visual maps, its helpful to have a way of catching typing
 " errors made in visual mode. What this does is to prompt you to correct your
 " visual mode mapping if you start out with g:Tex_Leader and then type some
@@ -305,8 +304,8 @@ TexLet g:Tex_UseMenuWizard = 0
 " It basically maps just the g:Tex_Leader character to a function
 TexLet g:Tex_CatchVisMapErrors = 1
 
-" }}}
-" Diacritics: {{{
+
+" Diacritics: 
 " whether or not you want to use diacritics 
 " (diacritics speed up typing some languages. the way they are set up in
 " latex-suite is
@@ -317,8 +316,8 @@ TexLet g:Tex_CatchVisMapErrors = 1
 " Default: 0 
 TexLet g:Tex_Diacritics = 0
 
-" }}}
-" Leader Options: {{{
+
+" Leader Options: 
 " The mappings in latex-suite are by default prefixed with the back-tick
 " character. For example, `/ inserts \frac{<++>}{<++>}<++> etc. You can change the
 " prefix with the following setting.
@@ -332,8 +331,8 @@ TexLet g:Tex_Leader = '`'
 " character different from '`'.
 TexLet g:Tex_Leader2 = ','
 
-" }}}
-" Environment Macros: {{{
+
+" Environment Macros: 
 " These mappings insert LaTeX "environments" such as 
 "       \begin{center}
 "           <++>
@@ -370,8 +369,8 @@ TexLet g:Tex_EnvironmentMaps  = 1
 TexLet g:Tex_EnvironmentMenus = 1
 
 
-" }}}
-" Font Macros: {{{
+
+" Font Macros: 
 " These mappings insert font descriptions such as:
 "       \textsf{<++>}<++>
 " again with the cursor at the first place-holder.
@@ -392,8 +391,8 @@ TexLet g:Tex_EnvironmentMenus = 1
 TexLet g:Tex_FontMaps = 1
 TexLet g:Tex_FontMenus = 1
 
-" }}}
-" Section Macros: {{{
+
+" Section Macros: 
 " Inserts LaTeX sections:
 "       \section
 " etc. Just as in the case of environments and fonts, can be enclosed with a
@@ -416,8 +415,8 @@ TexLet g:Tex_FontMenus = 1
 TexLet g:Tex_SectionMaps = 1
 TexLet g:Tex_SectionMenus = 1
 
-" }}}
-" Auctex Style Mappings: {{{
+
+" Auctex Style Mappings: 
 " Auctex.vim has heavily inspired various portions of latex-suite providing
 " various new ways of conviniently inserting environments.
 "
@@ -461,8 +460,8 @@ TexLet g:Tex_HotKeyMappings =
 TexLet g:Tex_PromptedCommands = 
    \ 'footnote,cite,pageref,label'
 
-" }}}
-" Smart Key Mappings: {{{
+
+" Smart Key Mappings: 
 " Latex-suite shites with a number of 'smart' maps, where the behavior of
 " standard keys is modified in a way which makes editing tex files easy.
 
@@ -514,8 +513,8 @@ TexLet g:Tex_SmartKeySpace = 0
 " Default: 1
 TexLet g:Tex_SmartKeyDot = 1
 
-" }}}
-" Advanced Math: {{{
+
+" Advanced Math: 
 " These mappings allow for fast inserting of math constructions 
 " brackets, better handling of space in math mode, unfortunately
 " they use <M-> mappings which conflicts with some encodings. This is easy way
@@ -546,13 +545,13 @@ TexLet g:Tex_SmartKeyDot = 1
 " Default: 1 
 TexLet g:Tex_AdvancedMath = 1
 
-" }}}
 
-" }}}
+
+
 " ==============================================================================
-" TeX Completion: {{{
+" TeX Completion: 
 
-" Options for controlling the window sizes of the completion windows {{{
+" Options for controlling the window sizes of the completion windows 
 
 " The height of the window which contains the \label's (when completing a
 " \ref) or bibtex entries (when completing a \cite). This option is used in
@@ -575,8 +574,8 @@ TexLet g:Tex_ExplorerHeight = 10
 " Directory for images. Read |latex-completion-explorer| before changing
 TexLet g:Tex_ImageDir = ''
 
-" }}}
-" Options for completing a \ref {{{
+
+" Options for completing a \ref 
 
 " Whether to use the "outline mode" for displaying the \label's while doing
 " \ref completion. In this mode, each label is displayed within the
@@ -602,8 +601,8 @@ TexLet g:Tex_ProjectSourceFiles = ''
 " for more information
 TexLet g:Tex_UseSimpleLabelSearch = 0
 
-" }}}
-" Options for completing a \cite'ation {{{
+
+" Options for completing a \cite'ation 
 
 " If set to 1, then the newer way of presenting the bibtex entries is used.
 " Instead of a |cwindow| showing just the keys and a synced |preview|
@@ -645,11 +644,11 @@ TexLet g:Tex_RememberCiteSearch = 0
 TexLet g:Tex_BIBINPUTS = ''
 TexLet g:Tex_TEXINPUTS = ''
 
-" }}}
 
-" }}}
+
+
 " ==============================================================================
-" Menus: set the kinds of menus which you would like to see. {{{
+" Menus: set the kinds of menus which you would like to see. 
 "
 " Setting this variable to zero will immediately disable _all_ menus. 
 " for finer control set this to 1 and then play with the other options.
@@ -701,9 +700,9 @@ if g:Tex_UseUtfMenus != 0 && has("gui_running")
 	set encoding=utf-8
 endif
 
-" }}}
+
 " ==============================================================================
-" Folding: latex-suite comes with 'fake' syntax folding. {{{
+" Folding: latex-suite comes with 'fake' syntax folding. 
 "
 " specifies whether the MakeTeXFolds() function will be defined. If this is
 " set to zero, then esentially you have disabled all of latex-suite's folding
@@ -720,9 +719,9 @@ TexLet g:Tex_Folding = 1
 "       by g:Tex_Folding), so you can do <F6> or \rf to refresh/create folds.
 TexLet g:Tex_AutoFolding = 1 
 
-" }}}
+
 " ============================================================================== 
-" Taglist: Support for taglist.vim {{{
+" Taglist: Support for taglist.vim 
 "
 " LaTeX-Suite offers now support for taglist.vim, the most popular Vim
 " interface for ctags. You should use ctags version >= 5.0 and taglist >= 3.0.
@@ -735,5 +734,5 @@ TexLet g:Tex_TaglistSupport = 1
 "       where).
 TexLet g:Tex_InternalTagsDefinitions = 1 
 
-" }}}
+
 " ============================================================================== 
