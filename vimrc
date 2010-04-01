@@ -121,7 +121,6 @@ imap <M-j> <C-w>j
 imap <M-h> <C-w>h
 imap <M-l> <C-w>l
 
-map \i :call AddIfndefGuard()<CR>
 map \\ :make 
 map \n :cn<CR>
 map \p :cp<CR>

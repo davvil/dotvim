@@ -1,6 +1,7 @@
 map <buffer> \h :call SwitchToHeader()<CR>
 map <buffer> <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 map <buffer> \] <Esc>:exe "ptjump " . expand("<cword>")<Esc>
+map <buffer> \i :call AddIfndefGuard()<CR>
 
 set tags+=~/extSW/STLtags
 
