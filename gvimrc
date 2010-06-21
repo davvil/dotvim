@@ -11,7 +11,7 @@ if !has("gui_gtk2")
 else
    "set guifont="xft:Bitstream Vera Sans Mono:size=8"
     if $HOSTNAME == "drizzt"
-        set guifont=fixed
+        set guifont=Monospace\ 8
     elseif $HOSTNAME == "windu"
         set guifont=Monospace\ 9
     endif
