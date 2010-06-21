@@ -200,6 +200,7 @@ TexLet g:Tex_ViewRuleComplete_dvi = ''
 TexLet g:Tex_IgnoredWarnings =
 	\'Underfull'."\n".
 	\'Overfull'."\n".
+    \'Font Warning:'."\n".
 	\'specifier changed to'."\n".
 	\'You have requested'."\n".
 	\'Missing number, treated as zero.'."\n".

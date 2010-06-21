@@ -242,4 +242,4 @@ let g:Tex_MultipleCompileFormats = "dvi,pdf"
 let g:Tex_ViewRule_pdf = '$HOME/.vim/ftplugin/xpdfFname.sh'
 let g:Tex_CompileRule_pdf="$HOME/.vim/ftplugin/pdflatexXpdf.sh $*"
 let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_IgnoreLevel = 2
+let g:Tex_IgnoreLevel = 3
