@@ -46,14 +46,8 @@ function! CleverTab()
         else
             return "\<C-I>"
         endif
-    "elseif exists('&omnifunc') && &omnifunc != ''
-    "    "Try to find out if omnifunc can do something
-    "    if empty(call(&omnifunc, [0, getline(".")[call(&omnifunc, [1, ""]):col(".")]]))
-    "        return "\<C-N>"
-    "    else
-    "        return "\<C-X>\<C-O>"
-    "Nice, but omifunc does NOT complete local variables in a function, which
-    "drives me crazy
+    elseif &ft == 'cpp' || &ft == 'c'
+        return "\<C-X>\<C-U>" " clang completion
     else
         return "\<C-N>"
     endif
