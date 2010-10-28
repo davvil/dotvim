@@ -21,7 +21,7 @@
 "       - http://llvm.org/viewvc/llvm-project/llvm/trunk/utils/vim/vimrc
 "
 
-au FileType c,cpp call s:ClangCompleteInit()
+au FileType c,cpp,objc,objcpp call s:ClangCompleteInit()
 
 let b:clang_exec = ''
 let b:clang_parameters = ''
@@ -29,15 +29,18 @@ let b:clang_user_options = ''
 
 function s:ClangCompleteInit()
     let l:local_conf = findfile(".clang_complete", '.;')
-    let l:opts = split(system("cat " . l:local_conf), "\n")
-    for l:opt in l:opts
-        let l:opt = substitute(l:opt, '-I\(\w*\)',
-                    \ '-I' . l:local_conf[:-16] . '\1', "g")
-        let b:clang_user_options .= " " . l:opt
-    endfor
+    let b:clang_user_options = ''
+    if l:local_conf != ""
+        let l:opts = readfile(l:local_conf)
+        for l:opt in l:opts
+            let l:opt = substitute(l:opt, '-I\(\w*\)',
+                        \ '-I' . l:local_conf[:-16] . '\1', "g")
+            let b:clang_user_options .= " " . l:opt
+        endfor
+    endif
 
     if !exists('g:clang_complete_auto')
-        let g:clang_complete_auto = 0
+        let g:clang_complete_auto = 1
     endif
 
     if !exists('g:clang_complete_copen')
@@ -54,8 +57,11 @@ function s:ClangCompleteInit()
     let b:clang_exec = 'clang'
     let b:clang_parameters = '-x c'
 
-    if &filetype == 'cpp'
-        let b:clang_exec .= '++'
+    if &filetype == 'objc'
+        let b:clang_parameters = '-x objective-c'
+    endif
+
+    if &filetype == 'cpp' || &filetype == 'objcpp'
         let b:clang_parameters .= '++'
     endif
 
@@ -118,23 +124,48 @@ function s:ClangQuickFix(clang_output)
     endif
 endfunction
 
+function s:DemangleProto(prototype)
+    let l:proto = substitute(a:prototype, '[#', "", "g")
+    let l:proto = substitute(l:proto, '#]', ' ', "g")
+    let l:proto = substitute(l:proto, '#>', "", "g")
+    let l:proto = substitute(l:proto, '<#', "", "g")
+    " TODO: add a candidate for each optional parameter
+    let l:proto = substitute(l:proto, '{#', "", "g")
+    let l:proto = substitute(l:proto, '#}', "", "g")
+
+    return l:proto
+endfunction
+
+let b:should_overload = 0
+
 function ClangComplete(findstart, base)
     if a:findstart
         let l:line = getline('.')
         let l:start = col('.') - 1
-        while l:start > 0 && l:line[start - 1] =~ '\i'
+        let l:wsstart = l:start
+        if l:line[l:wsstart - 1] =~ '\s'
+            while l:wsstart > 0 && l:line[l:wsstart - 1] =~ '\s'
+                let l:wsstart -= 1
+            endwhile
+        endif
+        if l:line[l:wsstart - 1] =~ '[(,]'
+            let b:should_overload = 1
+            return l:wsstart
+        endif
+        let b:should_overload = 0
+        while l:start > 0 && l:line[l:start - 1] =~ '\i'
             let l:start -= 1
         endwhile
-        return start
+        return l:start
     else
         let l:buf = getline(1, '$')
-        let l:tempfile = system("mktemp --tmpdir=" . expand('%:p:h')
-                    \. " --suffix=" . expand('%:t'))
-        let l:tempfile = l:tempfile[:-2] " Suppress the '\n' at the end of the filename.
+        let l:tempfile = expand('%:p:h') . '/' . localtime() . expand('%:t')
         call writefile(l:buf, l:tempfile)
+        let l:escaped_tempfile = shellescape(l:tempfile)
 
         let l:command = b:clang_exec . " -cc1 -fsyntax-only -code-completion-at="
-                    \ . l:tempfile . ":" . line('.') . ":" . col('.') . " " . l:tempfile
+                    \ . l:escaped_tempfile . ":" . line('.') . ":" . col('.')
+                    \ . " " . l:escaped_tempfile
                     \ . " " . b:clang_parameters . " " . b:clang_user_options . " -o -"
         let l:clang_output = split(system(l:command), "\n")
         call delete(l:tempfile)
@@ -146,7 +177,7 @@ function ClangComplete(findstart, base)
             return {}
         endif
         for l:line in l:clang_output
-            if l:line[:11] == 'COMPLETION: '
+            if l:line[:11] == 'COMPLETION: ' && b:should_overload != 1
                 let l:value = l:line[12:]
 
                 if l:value !~ '^' . a:base
@@ -157,13 +188,7 @@ function ClangComplete(findstart, base)
                 let l:word = value[:l:colonidx - 1]
                 let l:proto = value[l:colonidx + 3:]
                 let l:kind = s:get_kind(l:proto)
-                let l:proto = substitute(l:proto, '[#', "", "g")
-                let l:proto = substitute(l:proto, '#]', ' ', "g")
-                let l:proto = substitute(l:proto, '#>', "", "g")
-                let l:proto = substitute(l:proto, '<#', "", "g")
-                " TODO: add a candidate for each optional parameter
-                let l:proto = substitute(l:proto, '{#', "", "g")
-                let l:proto = substitute(l:proto, '#}', "", "g")
+                let l:proto = s:DemangleProto(l:proto)
 
                 let l:item = {
                             \ "word": l:word,
@@ -179,15 +204,16 @@ function ClangComplete(findstart, base)
                     return {}
                 endif
 
-            elseif l:line[:9] == 'OVERLOAD: '
-                " An overload candidate. Use a crazy hack to get vim to
-                " display the results. TODO: Make this better.
+            elseif l:line[:9] == 'OVERLOAD: ' && b:should_overload == 1
                 let l:value = l:line[10:]
+                let l:word = substitute(l:value, '.*<#', "", "g")
+                let l:word = substitute(l:word, '#>.*', "", "g")
+                let l:proto = s:DemangleProto(l:value)
                 let l:item = {
-                            \ "word": " ",
-                            \ "menu": l:value,
+                            \ "word": l:word,
+                            \ "menu": l:proto,
                             \ "kind": "f",
-                            \ "info": l:line,
+                            \ "info": l:proto,
                             \ "dup": 1}
 
                 " Report a result.
