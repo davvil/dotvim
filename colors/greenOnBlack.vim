@@ -47,33 +47,3 @@ highlight VertSplit    guifg=#505B67    guibg=black
 highlight MatchGroup   guifg=black      guibg=yellow
 highlight TagListTagName guifg=darkgreen guibg=NONE          gui=bold
 highlight SpellBad     guifg=red        guibg=gray18         gui=NONE
-
-
-" terminal, needs 88 color support (e.g. xterm, urxvt)
-highlight Search       ctermfg=Black    ctermbg=30           cterm=bold
-highlight Visual       ctermbg=19
-highlight Special      ctermfg=52
-highlight Comment      ctermfg=52
-highlight Statement    ctermfg=31	                     cterm=NONE
-highlight Type	          			             cterm=NONE
-highlight Constant     ctermfg=69
-highlight CursorLine                    ctermbg=80           cterm=NONE
-highlight Include      ctermfg=38
-highlight String       ctermfg=69
-highlight Type         ctermfg=31
-highlight PreProc      ctermfg=yellow
-highlight Pmenu        ctermfg=black    ctermbg=87
-highlight PmenuSel     ctermfg=white    ctermbg=83
-highlight Boolean      ctermfg=42
-highlight StatusLine   ctermfg=85       ctermbg=black
-highlight StatusLineNC ctermfg=81       ctermbg=85
-highlight Folded       ctermfg=79       ctermbg=black       cterm=bold
-highlight helpNote     ctermfg=yellow
-highlight htmlItalic   ctermfg=green                        cterm=None
-highlight TabLineFill  ctermfg=80
-highlight TabLineSel   ctermfg=black    ctermbg=82
-highlight TabLine      ctermfg=black    ctermbg=81          cterm=None
-highlight MyTagListFileName ctermfg=15  ctermbg=black
-highlight Title        ctermfg=86       ctermbg=black
-highlight VertSplit    ctermfg=81       ctermbg=black
-highlight MatchGroup   ctermfg=black    ctermbg=yellow
