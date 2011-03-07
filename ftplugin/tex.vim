@@ -10,9 +10,7 @@ set iskeyword+=:
 omap <buffer> ap ?^$\\|^\s*\(\\begin\\|\\end\\|\\label\\|\\item\\|\\\[\)?1<CR>//-1<CR>.<CR>
 
 " control xpdf from withing vim
-map <buffer> \lr :silent !xpdf -remote vimlatex -reload<CR>
-map <buffer> \lp :silent !xpdf -remote vimlatex -exec prevPage<CR>
-map <buffer> \ln :silent !xpdf -remote vimlatex -exec nextPage<CR>
+map <buffer> \lp :call TexPdfOverDVI()<CR>
 
 " Re map the \\ key to compile latex.
 " Probably it would be cleaner to call the corresponding function directly,

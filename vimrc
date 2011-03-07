@@ -237,3 +237,8 @@ let g:Tex_ViewRule_pdf = '$HOME/.vim/ftplugin/xpdfFname.sh'
 let g:Tex_CompileRule_pdf="$HOME/.vim/ftplugin/pdflatexXpdf.sh $*"
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_IgnoreLevel = 3
+
+func! TexPdfOverDVI()
+    let g:Tex_FormatDependency_pdf='dvi,ps,pdf'
+    let g:Tex_CompileRule_pdf="$HOME/.vim/ftplugin/ps2pdfXpdf.sh $*.ps"
+endfunc
