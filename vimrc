@@ -53,7 +53,7 @@ function! CleverTab()
     endif
 endfunction 
 
-set makeprg=scons\ -D\ -j3
+set makeprg=scons\ -D\ -j5
 
 "Custom commands
 command -nargs=1 Match match MatchGroup <q-args>
