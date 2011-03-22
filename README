@@ -1,6 +1,6 @@
 This my current vim configuration.
 
 I use vim mainly for coding (C++, python, haskell) and LaTeX. It is configured
-with this tasks in mind.
+with these tasks in mind.
 
 vimrc and gvimrc should be linked into $HOME/{.vimrc,.gvimrc}
