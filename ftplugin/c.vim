@@ -21,3 +21,5 @@ function SwitchToHeader()
 endfunction
 
 let g:c_ftplugin_functions_defined = 1
+
+compiler! gcc

@@ -48,10 +48,13 @@ function! CleverTab()
         endif
     elseif &ft == 'cpp' || &ft == 'c'
         return "\<C-X>\<C-U>" " clang completion
+        "return "\<C-N>"
     else
         return "\<C-N>"
     endif
 endfunction 
+
+let g:clang_complete_auto=0
 
 set makeprg=scons\ -D\ -j5
 
