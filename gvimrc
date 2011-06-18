@@ -13,7 +13,7 @@ else
     if $HOSTNAME == "drizzt"
         set guifont=Monospace\ 8
     elseif $HOSTNAME == "windu"
-        set guifont=Monospace\ 9
+        set guifont=Terminus\ 10
     elseif $HOSTNAME == "ellie"
         set guifont=Terminus\ 10
     endif
