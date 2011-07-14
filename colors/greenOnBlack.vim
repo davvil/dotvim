@@ -28,6 +28,7 @@ highlight Comment      guifg=#FF7F24
 highlight Statement    guifg=#00FFFF		             gui=NONE
 highlight Type	          			             gui=NONE
 highlight CursorLine                    guibg=#1A1A1A
+highlight CursorColumn                  guibg=#1A1A1A
 highlight Include      guifg=#B0C4DE
 highlight String       guifg=#FFA07A
 highlight Type         guifg=#00FFFF
