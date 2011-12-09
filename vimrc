@@ -55,6 +55,7 @@ function! CleverTab()
 endfunction 
 
 let g:clang_complete_auto=0
+let g:SuperTabDefaultCompletionType = "context"
 
 set makeprg=scons\ -D\ -j5
 
@@ -75,7 +76,7 @@ endfunction
 map \tw :call TextWidthToggle()<CR>
 
 "Keybindings
-imap <Tab> <C-R>=CleverTab()<CR>
+"imap <Tab> <C-R>=CleverTab()<CR>
 map \s :set hlsearch!<CR>
 map zz zfaB
 map \b :b#<CR>
@@ -86,9 +87,9 @@ map <S-Tab> :call NextField(' \{1,}',2,' ',0)<CR>
 map! <S-Tab> <C-O>:call NextField(' \{2,}',2,' ',0)<CR>
 " Enter accepts always a completion from the completion menu
 " See also the help entry for ins-completion-menu
-if v:version >= 700
-    inoremap <CR> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>CR>"<CR>
-endif
+"if v:version >= 700
+    "inoremap <CR> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>CR>"<CR>
+"endif
 " Emacs-like
 imap <C-t> <Esc>xpi
 imap <C-a> <C-o>^
@@ -97,7 +98,7 @@ imap <C-e> <C-o>$
 imap <M-BS> <Esc>dbxa
 imap <C-d> <C-o>x
 imap <C-k> <C-o>D
-map <Tab> ==
+"map <Tab> ==
 map <M-C-Up> <C-y>
 map <M-C-Down> <C-e>
 imap <M-C-Up> <C-o><C-y>
