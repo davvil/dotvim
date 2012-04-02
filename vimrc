@@ -142,10 +142,10 @@ if &background == "dark"
     endif
     if &term =~ "rxvt-unicode"
         "Set the cursor white in cmd-mode and orange in insert mode
-        let &t_EI = "\<Esc>]12;white\x9c"
+        let &t_EI = "\<Esc>]12;red\x9c"
         let &t_SI = "\<Esc>]12;orange\x9c"
         "We normally start in cmd-mode
-        silent !echo -e "\e]12;white\x9c" 
+        silent !echo -e "\e]12;red\x9c" 
     endif
 else
     colorscheme morning
@@ -244,7 +244,7 @@ let g:Tex_MultipleCompileFormats = "dvi,pdf"
 "let g:Tex_ViewRule_pdf = '$HOME/.vim/ftplugin/xpdfFname.sh'
 let g:Tex_ViewRule_pdf = 'evince'
 "let g:Tex_CompileRule_pdf="$HOME/.vim/ftplugin/pdflatexXpdf.sh $*"
-let g:Tex_CompileRule_pdf="pdflatex -interaction nonstopmode --file-line-error $*"
+let g:Tex_CompileRule_pdf="pdflatex --interaction nonstopmode --file-line-error $*"
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_IgnoreLevel = 3
 
