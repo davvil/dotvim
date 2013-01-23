@@ -16,3 +16,6 @@ map <buffer> \lp :call TexPdfOverDVI()<CR>
 " Probably it would be cleaner to call the corresponding function directly,
 " but I do not know which one it is!
 map <buffer> \\ \ll
+
+" Solve é problem in gvim
+imap <buffer> <leader>it <Plug>Tex_InsertItemOnThisLine
